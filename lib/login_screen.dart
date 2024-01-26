@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:login/dashboard_screen.dart';
 
 void main() {
   runApp(const LoginScreen());
@@ -51,13 +51,8 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16.0), // Adiciona espaçamento entre os widgets
                 ElevatedButton(
-                  onPressed: () {
-                    // Adicione a lógica de login aqui
-                    if (kDebugMode) {
-                      print('Botão de entrada pressionado!');
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
+                  onPressed: () => onButtonEntrarClicked(context),
+                    style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purple, // Cor roxa para o botão "Entrar"
                     minimumSize: const Size(double.infinity, 48), // Largura total e altura de 48
                   ),
@@ -73,5 +68,14 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+void onButtonEntrarClicked(BuildContext context) {
+  Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => const Dashboardscreen(),
+  ),
+  );
 }
 
