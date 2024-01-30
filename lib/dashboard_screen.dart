@@ -1,8 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:login/login_screen.dart';
+import 'activity_screen.dart';
 
-class Dashboardscreen extends StatelessWidget {
-  const Dashboardscreen({Key? key}) : super(key: key);
+class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({Key? key}) : super(key: key);
+
+  @override
+  _DashboardScreenState createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  List<String> activities = ['Estudar Flutter', 'Estudar Unity', 'Aprender Dart'];
+
+  void addActivity(String activity) {
+    if (activity.isNotEmpty) {
+      setState(() {
+        activities.add(activity);
+      });
+    }
+  }
+
+
+  void onButtonSairClicked(BuildContext context) {
+    Navigator.of(context).pushReplacementNamed("/login");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,13 +30,13 @@ class Dashboardscreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Checklist de atividades"),
       ),
-      drawer:  Drawer(
+      drawer: Drawer(
         child: Column(
           children: [
             const UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
                 radius: 64,
-                backgroundImage: AssetImage('assets/profile.jpg'),
+                backgroundImage: AssetImage('assets/images/profile.jpg'),
               ),
               accountName: Text("Gilmar Czeika"),
               accountEmail: Text("gilmar@email.com"),
@@ -31,37 +51,27 @@ class Dashboardscreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView(
-          children:  const [
-            ListTile(
-              leading: Icon(Icons.check),
-              title: Text("Estudar Flutter"),
-            ),
-            ListTile(
-              leading: Icon(Icons.check),
-              title: Text("Estudar Unity"),
-            ),
-            ListTile(
-              leading: Icon(Icons.check),
-              title: Text("Aprender Dart"),
-            ),
-          ],
+        child: ListView.builder(
+          itemCount: activities.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              leading: const Icon(Icons.check),
+              title: Text(activities[index]),
+            );
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ActivityScreen(addActivity: addActivity),
+            ),
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );
-  }
-
-  void onButtonSairClicked(BuildContext context) {
-    // Navigator.pushReplacement(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (context) => const LoginScreen(),
-    //   ),
-    // );
-    Navigator.of(context).pushReplacementNamed("/login");
   }
 }
