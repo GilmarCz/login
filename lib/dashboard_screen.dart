@@ -13,7 +13,7 @@ class Dashboardscreen extends StatelessWidget {
       drawer:  Drawer(
         child: Column(
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
                 radius: 64,
                 backgroundImage: AssetImage('assets/profile.jpg'),
@@ -22,8 +22,8 @@ class Dashboardscreen extends StatelessWidget {
               accountEmail: Text("gilmar@email.com"),
             ),
             ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: Text("Sair"),
+              leading: const Icon(Icons.exit_to_app),
+              title: const Text("Sair"),
               onTap: () => onButtonSairClicked(context),
             ),
           ],
@@ -32,7 +32,7 @@ class Dashboardscreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(
-          children:  [
+          children:  const [
             ListTile(
               leading: Icon(Icons.check),
               title: Text("Estudar Flutter"),
@@ -56,6 +56,12 @@ class Dashboardscreen extends StatelessWidget {
   }
 
   void onButtonSairClicked(BuildContext context) {
-    // Adicione a lógica para sair aqui
+    // Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) => const LoginScreen(),
+    //   ),
+    // );
+    Navigator.of(context).pushReplacementNamed("/login");
   }
 }

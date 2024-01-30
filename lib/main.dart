@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:login/dashboard_screen.dart';
 
 import 'login_screen.dart';
 
-
-
-void main(){
+void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      //home: const LoginScreen(),
+      initialRoute: "/login",
+      routes: {
+        "/login": (context) => LoginScreen(),
+        "/dashboard": (context) {
+          return Dashboardscreen();
+        }
+      },
     );
   }
 }
